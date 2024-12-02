@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CoffeeCard from './CoffeeCard';
 import { Link, useLoaderData } from 'react-router-dom';
 
-const Coffee = () => {
-    const loadedCoffees = useLoaderData();
-    const [coffees, setCoffees] = useState(loadedCoffees)
+const Coffee = ({loadedCoffees}) => {
+
+   
+    
+    const [coffees, setCoffees] = useState([])
+    useEffect(() =>{ fetch('http://localhost:5000/coffee')
+    .then(data=> data.json()) 
+    .then(result=>setCoffees(result))
+})
+    
+
     return (
         <div>
             <div className='m-20'>
